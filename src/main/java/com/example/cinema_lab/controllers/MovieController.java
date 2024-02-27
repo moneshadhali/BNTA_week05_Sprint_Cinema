@@ -22,7 +22,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<String> postMovie(Movie movie){
+    public ResponseEntity<String> saveMovie(Movie movie){
         return new ResponseEntity<>("", HttpStatus.CREATED);
     }
 }
