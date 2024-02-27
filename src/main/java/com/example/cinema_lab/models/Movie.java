@@ -15,6 +15,10 @@ public class Movie {
     @Column(name = "duration")
     private double duration;
 
+    public Movie(){
+
+    }
+
     public Movie( String title, String rating, double duration) {
         this.title = title;
         this.rating = rating;

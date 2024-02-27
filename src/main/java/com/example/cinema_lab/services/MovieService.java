@@ -25,11 +25,19 @@ public class MovieService {
         return movieRepository.findById(id);
     }
 
-    public String getAllMovies(){
+    public List<Movie> getAllMovies(){
         List<Movie> movies = movieRepository.findAll();
-        for (Movie movie : movies){
-            System.out.println(movie.getTitle());
-        }
-        return "movie saved in db";
+        return movies;
+    }
+
+    public Optional<Movie> updateMovieTitle(long id, String title){
+        Optional<Movie> movie = movieRepository.findById(id);
+        movie.get().setTitle(title);
+        movieRepository.save(movie.get());
+        return movie;
+    }
+
+    public void deleteMovie(long id){
+        movieRepository.deleteById(id);
     }
 }
