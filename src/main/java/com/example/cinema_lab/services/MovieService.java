@@ -5,6 +5,7 @@ import com.example.cinema_lab.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,12 +31,24 @@ public class MovieService {
         return movies;
     }
 
+    public List<Movie> filterMoviesByDuration(Double maxDuration){
+        List<Movie> movies = movieRepository.findAll();
+        List<Movie> filteredMovie = new ArrayList<>();
+        for (Movie movie: movies){
+            if(movie.getDuration()<= maxDuration){
+                filteredMovie.add(movie);
+            }
+        }
+        return filteredMovie;
+    }
+
     public Optional<Movie> updateMovieTitle(long id, String title){
         Optional<Movie> movie = movieRepository.findById(id);
         movie.get().setTitle(title);
         movieRepository.save(movie.get());
         return movie;
     }
+
 
     public void deleteMovie(long id){
         movieRepository.deleteById(id);

@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "movies")
 public class Movie {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id //primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //makes this auto-generator SERIAL TYPE
     private long id;
     @Column(name = "title")
     private String title;

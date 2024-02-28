@@ -18,10 +18,18 @@ public class MovieController {
     MovieService movieService;
 
     @GetMapping
-    public ResponseEntity<List<Movie>> getAllMovie(){
-        List<Movie> response = movieService.getAllMovies();
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<List<Movie>> getAllMovie(@RequestParam(required = false) Double maxDuration){
+
+        List<Movie> movies;
+        if (maxDuration == null){
+            movies = movieService.getAllMovies();
+        } else {
+            movies = movieService.filterMoviesByDuration(maxDuration);
+        }
+        return new ResponseEntity<>(movies, HttpStatus.OK);
     }
+
+
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Optional<Movie>> getMovieById(@PathVariable long id){
